@@ -16,7 +16,11 @@ It works out-of-the-box.
 git clone git@github.com:0xBADBAC0N/play-vue-webpack-spa.git
 ```
 
-Install all dependencies
+#### Requirements
+* sbt
+* npm
+
+#### Install all dependencies
 
 ```bash
 make update
