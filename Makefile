@@ -1,4 +1,6 @@
 run-dev:
+	make clean
+	make update
 	$(info >> starting play framework on http://localhost:9000)
 	sbt ~run
 
@@ -17,4 +19,4 @@ clean:
 	rm -rf public/bundle
 	rm -rf target
 
-.PHONY: show-help run-dev update
+.PHONY: run-dev run-prod update clean
