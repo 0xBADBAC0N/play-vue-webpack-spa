@@ -1,11 +1,9 @@
-run-dev:
-	make clean
-	make update
-	$(info >> starting play framework on http://localhost:9000)
-	sbt ~run
+run-dev: clean update
+    $(info >> starting play framework on http://localhost:9000)
+    sbt ~run
 
-run-prod:
-	make clean && make update && sbt dist
+run-prod: clean update
+	sbt dist
 	(cd target/universal && unzip play-vue-webpack-spa-1.1.zip -d production && cd production/play-vue-webpack-spa-1.1/bin && ./play-vue-webpack-spa)
 
 update:
