@@ -1,24 +1,18 @@
 import Vue from 'vue'
-import routes from './routes'
+import router from './router'
+import Main from './layouts/Main.vue'
+
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue);
 
 const app = new Vue({
   el: '#app',
-  data: {
-    currentRoute: window.location.pathname
+  components:{
+    Main
   },
-  computed: {
-    ViewComponent () {
-      const matchingView = routes[this.currentRoute];
-      return matchingView
-        ? require('./pages/' + matchingView + '.vue')
-        : require('./pages/404.vue')
-    }
-  },
-  render (h) {
-    return h(this.ViewComponent)
-  }
-});
-
-window.addEventListener('popstate', () => {
-  app.currentRoute = window.location.pathname
+  template: '<Main/>',
+  router
 });

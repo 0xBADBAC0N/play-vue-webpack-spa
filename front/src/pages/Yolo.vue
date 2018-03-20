@@ -1,16 +1,6 @@
 <template>
-  <main-layout>
+  <div>
     <p>juhuuu YOLO</p>
     <button type="button" class="btn btn-primary">Primary</button>
-  </main-layout>
+  </div>
 </template>
-
-<script>
-  import MainLayout from '../layouts/Main.vue'
-
-  export default {
-    components: {
-      MainLayout
-    }
-  }
-</script>
