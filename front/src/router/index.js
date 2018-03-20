@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import Yolo from '../pages/Yolo.vue'
+import Playground from '../pages/Playground.vue'
 import NotFound from '../pages/NotFound.vue'
 
 Vue.use(Router)
@@ -25,6 +26,11 @@ export default new Router({
             path: '/yolo',
             component: Yolo,
             name: 'yolo'
+        },
+        {
+            path: '/playground',
+            component: Playground,
+            name: 'playground'
         },
         {
             path: '*',

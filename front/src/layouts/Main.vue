@@ -3,6 +3,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/yolo">Yolo</router-link>
+        <router-link to="/playground">Playground</router-link>
         <router-link to="/asd">asd</router-link>
         <router-view/>
     </div>
