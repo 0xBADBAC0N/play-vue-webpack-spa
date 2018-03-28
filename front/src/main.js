@@ -11,8 +11,8 @@ Vue.use(BootstrapVue);
 const app = new Vue({
   el: '#app',
   components:{
-    Main
-  },
+      Main
+    },
   template: '<Main/>',
   router
 });
