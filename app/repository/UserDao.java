@@ -2,6 +2,7 @@ package repository;
 
 import entity.User;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -31,4 +32,7 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user")
     @RegisterBeanMapper(User.class)
     List<User> listUsers();
+
+    @SqlQuery("SELECT * FROM user WHERE email = :email AND SHA2(CONCAT(:password, 'salt'), 512) LIMIT 1")
+    User getUser(@Bind("email") String email, @Bind("password") String password);
 }

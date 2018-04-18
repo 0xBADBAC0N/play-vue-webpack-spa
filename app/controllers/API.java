@@ -6,7 +6,6 @@ import entity.User;
 import lib.DatabaseManager;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.db.Database;
 import repository.UserDao;
 
 import java.util.List;
@@ -42,6 +41,10 @@ public class API extends Controller {
 
 		System.out.println("email -> " + email);
 		System.out.println("Password -> " + password);
+
+		User user = databaseManager.getDbi().withExtension(UserDao.class, dao -> dao.getUser(email, password));
+
+		System.out.println("Result: " + user);
 
 
 //		final Connection connection = database.getConnection();
