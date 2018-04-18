@@ -12,7 +12,7 @@
 
 
 <script>
-import RAPI from '../api/node'
+import API from '../api/node'
 
 export default {
   name: 'Playground',
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     consoleClick() {
-      RAPI.getHelloWorld(result => {
+      API.getHelloWorld(result => {
         this.lol = result
       })
     }

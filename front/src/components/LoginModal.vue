@@ -1,52 +1,54 @@
 <template>
     <div style="display: inline;">
         <b-btn v-b-modal.modalPrevent>Login</b-btn>
-        <!-- Main UI -->
-        <!--<div class="mt-3 mb-3">-->
-        <!--Submitted Names:-->
-        <!--<ul>-->
-        <!--<li v-for="n in names">{{n}}</li>-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!-- Modal Component -->
         <b-modal id="modalPrevent"
                  ref="modal"
                  title="Submit your name"
                  @ok="handleOk"
-                 @shown="clearName">
+                 @shown="clearFields">
             <form @submit.stop.prevent="handleSubmit">
-                <b-form-input type="text" placeholder="Enter your name" v-model="name"></b-form-input>
-                <b-form-input type="text" placeholder="Enter your pw" v-model="password"></b-form-input>
+                <b-form-input type="text" placeholder="Enter your email" v-model="email"></b-form-input>
+                <b-form-input type="password" placeholder="Enter your pw" v-model="password"></b-form-input>
             </form>
         </b-modal>
     </div>
 </template>
 
+<!--suppress JSAnnotator -->
 <script>
+    import API from '../api/node'
+
     export default {
         data() {
             return {
-                name: null,
-                names: [],
+                email: null,
                 password: null
             }
         },
         methods: {
-            clearName() {
-                this.name = ''
+            clearFields() {
+                this.email = '',
+                this.password = ''
             },
             handleOk(evt) {
                 // Prevent modal from closing
                 evt.preventDefault()
-                if (!this.name) {
-                    alert('Please enter your name')
+                if (!this.email) {
+                    alert('Please enter your email.')
+                } else if (!this.password) {
+                    alert('Please enter your password.')
                 } else {
                     this.handleSubmit()
                 }
             },
             handleSubmit() {
-                this.names.push(this.name)
-                this.clearName()
+                API.getSession(this.email, this.password,result => {
+                    if (result){
+                        alert('yay:'+result)
+                    }
+                })
+
+                this.clearFields()
                 this.$refs.modal.hide()
             }
         }

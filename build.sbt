@@ -10,6 +10,12 @@ scalaVersion := "2.12.2"
 lazy val `play-vue-webpack-spa` = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies ++= Seq(guice, filters, jdbc , cacheApi ,ws , specs2 % Test)
+libraryDependencies += javaJdbc
+libraryDependencies ++= Seq( javaJdbc, "mysql" % "mysql-connector-java" % "8.0.9-rc")
+libraryDependencies += "commons-dbcp" % "commons-dbcp" % "1.4"
+libraryDependencies += guice
+libraryDependencies += "org.jdbi" % "jdbi3-core" % "3.1.1"
+libraryDependencies += "org.jdbi" % "jdbi3-sqlobject" % "3.1.1"
 
 // Play framework hooks for development
 PlayKeys.playRunHooks += WebpackServer(file("./front"))

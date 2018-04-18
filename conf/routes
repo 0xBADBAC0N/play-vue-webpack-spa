@@ -3,13 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /								controllers.FrontController.index()
-GET     /:x								controllers.FrontController.indexWithRoute(x: String)
+GET     /								controllers.Page.index()
+GET     /:x								controllers.Page.indexWithRoute(x: String)
+GET		/helloworld/					controllers.Page.GetHelloWorld()
 
 # Rest API
-GET		/helloworld/					controllers.RestAPIController.helloWorld()
-GET		/getAllImages/					controllers.RestAPIController.getAllImages()
-
+POST	/login/							controllers.API.Login()
+POST	/additems						controllers.API.AddItems()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file					controllers.Assets.at(path="/public", file)
