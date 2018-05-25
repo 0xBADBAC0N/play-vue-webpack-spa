@@ -43,8 +43,7 @@ create table if not exists user (
 	updated_at timestamp default CURRENT_TIMESTAMP(),
 	display_name varchar(100) not null,
 	email varchar(190) not null,
-	session varchar(36),
-	password varchar(250) not null,
+	passwordhash varchar(250) not null,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `email` (`email`)
 );
@@ -52,8 +51,8 @@ create table if not exists user (
 -- Set up the items table
 CREATE TABLE IF NOT EXISTS items (
 	id BIGINT UNSIGNED AUTO_INCREMENT, 
-	created_at timestamp default current_timestamp,
-	updated_at timestamp not null,
+	created_at timestamp default CURRENT_TIMESTAMP(),
+	updated_at timestamp default CURRENT_TIMESTAMP(),
 	set_json MEDIUMTEXT NOT NULL,
 	title varchar(100) not null,
 	desciption varchar(255) not null,
@@ -61,13 +60,24 @@ CREATE TABLE IF NOT EXISTS items (
 	PRIMARY KEY  (`id`),
 	FOREIGN KEY (created_from) REFERENCES user(id)
 );
+
+CREATE TABLE IF NOT EXISTS sessions (
+	id INT UNSIGNED AUTO_INCREMENT, 
+	created_at timestamp default CURRENT_TIMESTAMP(),
+	updated_at timestamp default CURRENT_TIMESTAMP(),
+	valid_until timestamp not null,
+	uuid varchar(36) not null unique,
+	associated_user BIGINT UNSIGNED not null ,
+	PRIMARY KEY  (`id`),
+	FOREIGN KEY (associated_user) REFERENCES user(id)
+);
 ```
 
 ##### Test
 ```bash
 -- Create example user
-INSERT INTO user (display_name, email, password)
-VALUES ('Demo User', 'demouser@gmail.com', SHA2('demo', 512));
+INSERT INTO user (display_name, email, passwordhash)
+VALUES ('Demo User', 'demouser@gmail.com', SHA2(CONCAT('demo', 'salt'), 512));
 
 -- Create demo set
 INSERT INTO items (set_json, title, desciption, created_from)

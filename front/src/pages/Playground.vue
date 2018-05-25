@@ -8,11 +8,9 @@
   </div>
 </template>
 
-
-
-
 <script>
 import API from '../api/node'
+import Fingerprint2 from 'fingerprintjs2';
 
 export default {
   name: 'Playground',
@@ -25,6 +23,10 @@ export default {
     consoleClick() {
       API.getHelloWorld(result => {
         this.lol = result
+        // new Fingerprint2().get((fingerprint, components) => {
+        //     alert(fingerprint+"\n"+components)
+        //      console.log(JSON.stringify(components))
+        // })
       })
     }
   },

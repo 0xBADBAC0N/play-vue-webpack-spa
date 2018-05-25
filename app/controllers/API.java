@@ -16,8 +16,8 @@ public class API extends Controller {
 	DatabaseManager databaseManager;
 
 	public Result Login() {
-		List<User> userNames = databaseManager.getDbi().withExtension(UserDao.class, UserDao::listUsers);
-		System.out.println(databaseManager.getDbi().withExtension(UserDao.class, UserDao::listUsers));
+		final List<User> userNames = databaseManager.getJdbi().withExtension(UserDao.class, UserDao::listUsers);
+		System.out.println(userNames);
 
 		System.out.println("LÄUFT");
 
@@ -42,9 +42,13 @@ public class API extends Controller {
 		System.out.println("email -> " + email);
 		System.out.println("Password -> " + password);
 
-		User user = databaseManager.getDbi().withExtension(UserDao.class, dao -> dao.getUser(email, password));
-
+		final User user = databaseManager.getJdbi().withExtension(UserDao.class, dao -> dao.getUser(email, password));
 		System.out.println("Result: " + user);
+
+		if (user != null){
+			// create session
+			return ok("fakeSession");
+		}
 
 
 //		final Connection connection = database.getConnection();

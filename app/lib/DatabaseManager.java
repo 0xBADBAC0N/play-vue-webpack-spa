@@ -10,25 +10,27 @@ import javax.inject.Singleton;
 
 @Singleton
 public class DatabaseManager {
-	private Jdbi dbi;
+	private Jdbi jdbi;
 
 	@Inject
 	public DatabaseManager(final Database database) {
-		dbi = Jdbi.create(database.getDataSource());
-		dbi.installPlugin(new SqlObjectPlugin());
+		jdbi = Jdbi.create(database.getDataSource());
+		jdbi.installPlugin(new SqlObjectPlugin());
 
-		dbi.registerRowMapper(User.class,
+		jdbi.registerRowMapper(User.class,
 			(rs, ctx) -> {
 				final User user = new User();
 				user.id = rs.getInt("id");
+				user.display_name = rs.getString("display_name");
+				user.email = rs.getString("email");
+				user.passwordhash = rs.getString("passwordhash");
+
 				return user;
 			}
 		);
-
-		System.out.println("Yolo i exist");
 	}
 
-	public Jdbi getDbi() {
-		return dbi;
+	public Jdbi getJdbi() {
+		return jdbi;
 	}
 }
