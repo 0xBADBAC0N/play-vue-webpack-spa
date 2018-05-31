@@ -45,7 +45,7 @@ public class API extends Controller {
 		final User user = databaseManager.getJdbi().withExtension(UserDao.class, dao -> dao.getUser(email, password));
 		System.out.println("Result: " + user);
 
-		if (user != null){
+		if(user != null) {
 			// create session
 			return ok("fakeSession");
 		}
@@ -86,6 +86,18 @@ public class API extends Controller {
 		// bilder[], titel, text
 
 
+		return ok();
+	}
+
+	public Result GetItems() {
+		return ok();
+	}
+
+	public Result VoteUp(final String id) {
+		return ok();
+	}
+
+	public Result VoteDown(final String id) {
 		return ok();
 	}
 

@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS items (
 	FOREIGN KEY (created_from) REFERENCES user(id)
 );
 
+
 CREATE TABLE IF NOT EXISTS sessions (
 	id INT UNSIGNED AUTO_INCREMENT, 
 	created_at timestamp default CURRENT_TIMESTAMP(),
